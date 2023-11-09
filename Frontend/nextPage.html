@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Urban Services - Next Step</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Welcome! Who are you?</h1>
+            <p>Please select your role:</p>
+            <div class="role-selection">
+                <button onclick="goToForm('visitor')">Visitor</button>
+                <button onclick="goToForm('labor')">Labor</button>
+                <button onclick="goToForm('serviceTaker')">Service Taker</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToForm(role) {
+            // Redirect the user to the appropriate form based on the role selected
+            if (role === 'visitor') {
+                window.location.href = 'visitorForm.html';
+            } else if (role === 'labor') {
+                window.location.href = 'laborForm.html';
+            } else if (role === 'serviceTaker') {
+                window.location.href = 'serviceTakerForm.html';
+            }
+        }
+    </script>
+</body>
+</html>
