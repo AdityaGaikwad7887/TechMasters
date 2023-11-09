@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Metro Fixers</title>
+    {% comment %} {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}}"> {% endcomment %}
+    <style>
+        /* Global Reset */
+h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* height: 100vh; */
+    flex-direction:column;
+    background-color: #f0f0d8;
+}
+
+/* Styling for the Amazon-like header */
+.amazon-header {
+    background-color: #6a1d4b;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px 0;
+    border-radius: 0px;
+}
+
+.amazon-header .amazon-navbar {
+    
+   
+    text-align:center;
+    /* width: fit-content; */
+    
+}
+
+
+.amazon-header .amazon-navbar ul {
+    
+    list-style: none;
+    padding: 0;
+    /* padding-left: 50px; */
+    margin: 0;
+    
+}
+
+.amazon-header .amazon-navbar ul li {
+    display:inline;
+    margin-right: 35px;
+}
+
+.amazon-header .amazon-navbar ul li a {
+    color: #fff;
+    text-decoration:underline;
+}
+
+/* Section Styles */
+section {
+    padding: 40px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-seri, Geneva, Tahoma, sans-serif, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Helvetica, sans-serif, 'Times New Roman', Times, serif;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-bottom: 20px;
+}
+
+/* Specific Styles for Sections */
+#services {
+    background-color: #f7f7f7;
+}
+
+#products {
+    background-color: #e6f7ec;
+}
+
+#about {
+    background-color: #f1f1f1;
+}
+
+#contact {
+    background-color: #e9f7fb;
+}
+
+#more {
+    background-color: #f9f0f7;
+}
+
+
+/* CSS for Form */
+.form-container {
+    text-align: center;
+
+    
+}
+
+form {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #36354a;
+    border-radius: 7.5px;
+    background-color: #ca7d7d;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ccc;
+    font-size:25px;
+    border-radius:5 px;
+    background-color: #380c47;
+    transition: background-color 0.5s;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+    color: #380c47;
+}
+
+/* CSS for Text Area */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical; /* Allowing vertical resizing */
+}
+
+/* Optional Focus Styles */
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none; /* Remove default focus outline */
+}
+
+/* CSS for Select Dropdown */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Styles for options inside the dropdown */
+select option {
+    padding: 10px;
+}
+
+/* Optional Focus Styles */
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none; /* Remove default focus outline */
+}
+
+#experience {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#experience:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+{% block css %}{% endblock css %}
+    </style>
+    
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    
+    
+  <div class="amazon-header">
+        <div class="amazon-navbar">
+            <ul style="position: left;">
+                <li><a href="/home" >Home</a></li>
+                <li><a href="/services" >Services</a></li>
+                <li><a href="/products" >Products</a></li>
+                <li><a href="/about" >About</a></li>
+                <li><a href="/contact" >Contact</a></li>
+                {% if user.is_authenticated%}
+                <li><a href="/LogOut" >LogOut</a></li>
+                {%else%}
+                <li class="Userlogin"  style="margin-left: 20rem;"><a href="/Login" >Login</a></li>
+                <li><a href="/sign_in" >Sign-in</a></li>
+                {% endif %}
+                
+                             
+            </ul>
+        </div>
+    </div>
+    
+
+    {% if not user.is_authenticated%}
+    {%if dir == "login" or dir == "SignIn" %}
+    <section id="home">
+        <div class="container">
+            <div class="form-container">
+                
+                <h2>{{dir}}</h2>
+                <form id="signup-form" method="POST" novalidate="">
+                    {% csrf_token %}
+
+                    {% if dir == 'login' %}
+                    
+                    <input type="text" id="username" value="username" placeholder="Username" name="username"required>
+                    
+                    <input type="password" id="password" value= "password" placeholder="Password" name="password" required>
+                    <button type="submit" id="submit-btn" value="submit" style="margin-top:20px; background-color:green">Submit</button>
+                    {% endif %}
+                    {% if dir == 'SignIn' %}
+                    <div class="form-part current-part" id="part1">
+                        <input type="text" id="username" value="username" placeholder="Username" name="username"required>
+                    
+                    <input type="password" id="password" value= "password" placeholder="Password" name="password" required>
+                    <input type="email" id="email" value="email" placeholder="Email" name="email" required>
+                    <input type="mob_no" id="mob_no" value= "mob_no" name="mob_no" required>
+
+
+                    <select id="location" name="location" required >
+                        <option value="" disabled selected>Select Location</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                        <option value="Patna">Kolhapur</option>
+                        <option value="Kolkata">Nagpur</option>
+                        <option value="Patna">Sangli</option>
+                        <option value="Kolkata">Dadar</option>
+                        <option value="Kolkata">Thane</option>
+                        <option value="Kolkata">Bandra</option>
+                        <option value="Patna">Dombivli</option>
+                        <option value="Kolkata">Nashik</option>
+                        <option value="Kolkata">Satara</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Kolkata">Delhi</option>
+                        <option value="Kolkata">Chennai</option>
+                        <option value="Kolkata">Jaipur</option>
+                        <option value="Kolkata">Indore</option>
+                        <option value="Kolkata">Hydrabad</option>
+                        <option value="Kolkata">Bhopal</option>
+                        <option value="Kolkata">Vellore</option>
+                        <option value="Kolkata">Madras</option>
+                        <option value="Kolkata">Ahmedabad</option>
+                        <option value="Kolkata">Patna</option>
+                        <!-- Add other cities here -->
+                    </select>
+
+                    <button type="button" onclick="nextPart('part2')">Next</button>
+                    
+                </div>
+
+                
+                <div class="form-part" id="part2">
+                    <div class="form-container">
+                        <h1>Welcome! Who are you?</h1>
+                        <p>Please select your role:</p>
+                        <div class="role-selection">
+                            
+                            <button type="button" id="Lobour" onclick="goToForm('Labour')">Labour</button>
+                            <input id="hidden-input" style="display:none;" type="text">
+                            <button type="button" id="serviceTaker" style="margin-top:20px" onclick="goToForm('ServiceTaker')">Service Taker</button>
+                        </div>
+                    </div>
+                            <div id="labor-form">
+                                <select id="profession" name="profession" required>
+                                    <option value="" disabled selected>Select Profession</option>
+                                    <option value="House Cleaning">House Cleaning</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Electrical Services">Electrical Services</option>
+                                    <option value="Gardening">Gardening</option>
+                                    <option value="Painting">Painting</option>
+                                    <option value="Carpentry">Carpentry</option>
+                                    <option value="HVAC Services">HVAC Services</option>
+                                    <option value="Appliance Repair">Appliance Repair</option>
+                                    <option value="Pest Control">Pest Control</option>
+                                    <option value="Flooring Services">Flooring Services</option>
+                                    <option value="Roofing Services">Roofing Services</option>
+                                    <option value="Masonry Services">Masonry Services</option>
+                                    <option value="Window Cleaning">Window Cleaning</option>
+                                    <option value="Interior Design">Interior Design</option>
+                                    <option value="Furniture Assembly">Furniture Assembly</option>
+                                    <option value="Junk Removal">Junk Removal</option>
+                                    <option value="Home Security Services">Home Security Services</option>
+                                    <option value="Locksmith Services">Locksmith Services</option>
+                                </select>
+                                <input type="text" name="Experience" id="experience" placeholder="Years of Experience" required>
+                                <input type="text" id="skills" name="skills" placeholder="Your Skills" value="No skills">
+                            </div>    
+                        
+                    <button type="submit" id="submit-btn" value="submit" style="margin-top:20px; background-color:green">Submit</button>
+                </div>
+                
+                    
+                {% endif %}
+                </form>
+            </div>
+        </div>
+    
+    </section>
+    {% endif %}
+    {% endif %}
+    {% block body %}{% endblock body %}
+   
+</body>
+</html>

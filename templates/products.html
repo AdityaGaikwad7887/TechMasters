@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Our Products - Urban Services</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="amazon-header">
-        <div class="amazon-navbar">
-            <ul>
-                <li><a href="index.html" >Home</a></li>
-                <li><a href="services.html" >Services</a></li>
-                <li><a href="products.html" >Products</a></li>
-                <li><a href="about.html" >About</a></li>
-                <li><a href="contact.html" >Contact</a></li>
-                <li><a href="more.html" >More</a></li>
-            </ul>
-        </div>
-    </div>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
 
+{%block body%} 
     <h1>Our Products</h1>
     <p>Explore our selection of quality products:</p>
     <ul>
@@ -40,6 +23,4 @@
     </ul>
     <p>Experience convenience and quality with our products!</p>
 
-    <script src="script.js"></script>
-</body>
-</html>
+{%endblock body%}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block css %}
+
+    .form-part {
+        display: none;
+    }
+
+    .current-part {
+        display: block;
+    }
+
+    #labor-form{
+        display:none;
+    }
+
+{% endblock css %}
+
+{%block body%}    
+    <h1>Metro Fixers</h1>
+
+    
+    
+<div></div>
+<section id="services">
+    <h2>Our Services</h2>
+    <p>Explore a wide range of services to meet your needs. From household services to professional consultations, we've got you covered.</p>
+    <ul>
+        <li>Service 1</li>
+        <li>Service 2</li>
+        <!-- Add more service details here -->
+    </ul>
+</section>
+
+<section id="products">
+    <h2>Our Products</h2>
+    <p>Discover quality products for your home and lifestyle. From tools to accessories, find what you need here.</p>
+    <ul>
+        <li>Product 1</li>
+        <li>Product 2</li>
+        <!-- Add more product details here -->
+    </ul>
+</section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Learn more about our mission, vision, and commitment to providing top-notch services and products to our customers.</p>
+        <p>Founded in 20XX, Metro Fixers is dedicated to providing high-quality services and products to our customers.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions or need assistance? Reach out to us, and we'll be happy to help.</p>
+        <p>Contact us via phone at: 123-456-7890</p>
+        <p>Or email us at: info@metrofixers.com</p>
+    </section>
+
+    <section id="more">
+        <h2>More Information</h2>
+        <p>Explore additional resources, FAQs, or any other relevant information you may need.</p>
+        <p>For FAQs, visit our website or contact our support team.</p>
+    </section>
+
+    <script>
+
+        function goToForm(role) {
+            // Redirect the user to the appropriate form based on the role selected
+            if (role === 'Labour') {
+                document.getElementById("labor-form").style.display = "block";
+            }
+            var hiddenInput = document.getElementById("hidden-input");
+            
+            hiddenInput.name = 'user_type';
+            hiddenInput.value = role;
+            
+            
+        }
+
+        function nextPart(nextPartId) {
+            document.getElementById('part1').classList.remove('current-part');
+            document.getElementById('part2').classList.remove('current-part');
+    
+            document.getElementById(nextPartId).classList.add('current-part');
+        }
+    </script>
+
+{%endblock body%}   
