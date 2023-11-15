@@ -1,20 +1,24 @@
 from collections.abc import Iterable
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
+
 import uuid
-# Create your models here.
 
-# class LabourUserManager(BaseUserManager):
-#     def create_user(self, email, password=None, **extra_fields):
-#         if not email:
-#             raise ValueError('The Email field must be set')
-#         email = self.normalize_email(email)
-#         user = self.model(email=email, **extra_fields)
-#         user.set_password(password)
-#         user.save(using=self._db)
-#         return user
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to="img/%y")
+    caption = models.CharField(max_length=20 , null=False)
+    charges = models.IntegerField(null=False)
 
+    def __str__(self):
+        return self.caption
+    
+class ServiceImage(models.Model):
+    image = models.ImageField(upload_to="img/%y")
+    caption = models.CharField(max_length=20 , null=False)
+    charges = models.IntegerField(null=False)
+
+    def __str__(self):
+        return self.caption
 
 class LabourUser(models.Model):
     username = models.CharField(max_length=50 , null = False,unique=True)
@@ -23,8 +27,10 @@ class LabourUser(models.Model):
     password = models.CharField(max_length=10 , null = False)
     profession = models.CharField(max_length=10 , null = False)
     location = models.CharField(max_length=10 , null = False)
-    mobile = models.IntegerField(null=False)
-    # excperience = models.IntegerField(default=0)
+    image = models.ImageField(upload_to="img/%y",default="../media/defualtuser.jpg")
+    mobile = models.PositiveIntegerField(null=False)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    score = models.IntegerField(default=0 ,null=True)
     skills = models.CharField(max_length=50 , null=False,default="No skills")
 
     # objects = LabourUserManager()
@@ -45,6 +51,7 @@ class NormalUser(models.Model):
     password = models.CharField(max_length=10 , null = False) 
     location = models.CharField(max_length=10 , null = False)
     mobile = models.IntegerField(null=False)   
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
     def __str__(self):
@@ -54,3 +61,32 @@ class NormalUser(models.Model):
         self.password = User.objects.make_random_password()
         return super().save(*args,**kwargs)
 
+
+class quiz(models.Model):
+    service  = models.CharField(max_length=50)
+
+    def get_question(self):
+        return self.question_set.all()
+    
+    def __str__(self):
+        return self.service
+
+
+class questions(models.Model):
+    text = models.CharField(max_length=200)
+    quiz = models.ForeignKey(quiz,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text
+    
+    def get_answer(self):
+        return self.answer_set.all()
+    
+
+class Answer(models.Model):
+    text = models.CharField(max_length=200)
+    correct  = models.BooleanField(default=False)
+    questions = models.ForeignKey(questions,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text 

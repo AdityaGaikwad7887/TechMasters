@@ -1,34 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def home(request):
     global dict
     dict = {'user':request.user,
-            'dir':''}     
+            'dir':''}   
+    # if request.method == "GET":
+    
     return render(request,'index.html')
 
 def about(request):
-    return render(request,'about.html',dict)
+    allLabourUser = LabourUser.objects.all()
+    
+    dict['data'] = allLabourUser
+    return render(request,'about.html')
 
 def contact(request):
     return render(request,'contact.html',dict)
 
 def products(request):
+    allProdImages = ProductImage.objects.all()
+    dict['ProductIMAGE'] = allProdImages
     return render(request,'products.html',dict)
 
 def services(request):
+    allServImages = ServiceImage.objects.all()
+    dict['ServImage'] = allServImages
+    # if request.method == "GET":
+        
+    
     return render(request,'services.html',dict)
 
 def log_out(request):
     logout(request)
     dict.update({'user': request.user})
     # messages.success(request,'logout succesfully')
-    return render(request , 'index.html',dict)
+    return HttpResponseRedirect('/home')
 
 def sign_in(request):
     dict.update({'dir':'SignIn'})
@@ -48,19 +61,21 @@ def sign_in(request):
         print(user.is_authenticated)
         dict.update({'user': request.user})
         
+        
         if(user_type == "Labour"):
             skills = request.POST.get('skills')
             
             profession = request.POST.get('profession')
-            user1 = LabourUser(username = username,email = email,password=password,mobile = mobile,location=location , skills = skills,profession=profession)
+            user1 = LabourUser(username = username,email = email,password=password,mobile = mobile,location=location , skills = skills,profession=profession,user = user)
             user1.save()
 
         else :
-            user1 = NormalUser(username = username,email = email,password=password,mobile = mobile,location=location)
+            user1 = NormalUser(username = username,email = email,password=password,mobile = mobile,location=location , user = user)
             user1.save()    
         
-             
-        return render(request,'index.html',dict)
+        
+        
+        return HttpResponseRedirect('/home')
 
     return render(request,"index.html",dict)
 
@@ -74,15 +89,56 @@ def log_in(request):
         password = request.POST.get('password')
 
         user =authenticate(username =username , password = password)
-
+        
+       
         if user is not None:
             login(request ,user)
             print(user.is_authenticated)
             messages.success(request , "successfully logged in")
             dict.update({'user':request.user})
             # img =Image.objects.all()
-            return render(request, 'index.html',dict)
+            return HttpResponseRedirect('/home')  
         else :
-            messages.success(request , "invalid credential")    
+            messages.success(request , "invalid credential")  
+
+            
 
     return render(request,"index.html",dict)
+
+
+def LabourList(request,serviceType):
+    print(serviceType)
+    labours = LabourUser.objects.filter(profession = serviceType)
+    return render(request,'laborList.html',{'labours':labours , 'serviceType' : serviceType})
+
+def quizFun(request):
+    if request.method == "POST":
+        score = request.POST.get('score')
+        print(score)
+        print("hi")
+        user1 = LabourUser.objects.get(username = request.user.username)
+        user1.score =user1.score+ int(score)
+        user1.save()
+        return HttpResponseRedirect('/home')
+    user1 = LabourUser.objects.get(username = request.user.username)
+    quiz1 = quiz.objects.get(service = user1.profession)
+    questions2 = []
+    questions1 = questions.objects.filter(quiz = quiz1)
+    
+    
+    for question1 in questions1:
+        ans2 = []
+        ans = Answer.objects.filter(questions = question1)
+        for answ in ans:
+            ans2.append(answ.text)
+        ans1 = Answer.objects.get(questions = question1,correct = True)
+        questions2.append({question1.text : {ans1 : ans2}})
+        
+       
+        
+
+    return render(request ,'Quiz.html' , {'data':questions2});   
+      
+
+        
+    

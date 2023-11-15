@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static%}
+{%block title%}Quiz{%endblock title%}   
+{%block css%}
+
+{%endblock css%} 
+{%block body%}
+    
+    <form method="POST" id="quesForm"> 
+    {% csrf_token %}
+    {%for question in data%}
+    
+    {%for ques,ans in question.items%}
+    <h3>{{ques}}</h3>
+    {%for correctAnswer,ans1 in ans.items%}
+    {%for answer in ans1%}
+    <h4><input type="radio" name="{{ques}}" value="{{answer}}">
+    {{answer}}</h4>
+    {%endfor%}
+    {%endfor%} 
+    <hr>
+    {%endfor%}
+    {%endfor%}
+    <input type="hidden" name= "score" value=0 id="score">
+    
+    <button id="submit-btn" style="margin-top:20px; background-color:green" onclick="result()">submit</button>
+    
+    </form>
+   
+
+    <script>
+        function result(){
+            
+            var score = 0;
+
+
+
+            {%for question in data%}
+
+            {%for ques,ans in question.items%}
+                var result;
+                {%for answ in ans%}
+                    result = "{{answ}}";
+                {%endfor%}
+                
+                var userans = document.querySelector('input[name = "{{ques}}"]:checked').value;
+                
+                
+                if(userans == result){
+                    document.getElementById("score").innerHTML = "You are the best";
+                    score=1;
+                    
+                }
+                
+
+            {%endfor%}
+            {%endfor%}
+            document.getElementById('score').value = score ;
+            
+            document.getElementById('quesForm').submit();
+        }
+        
+    </script>
+{%endblock body%}
+
