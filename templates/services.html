@@ -39,33 +39,48 @@
     text-align: center;
     color: black;
 }
+.serve{
+    display: grid;
+    place-items: center;
+}
+.serv:hover{
+    font-size: larger;
+    background-color: black;
+    color: whitesmoke;
+    font-family: cursive;
+}
+
 
 
 {%endblock css%}
 {%block body%} 
 
-    <h1>Our Services</h1>
-    <p>At Urban Services, we offer a diverse range of solutions:</p>
-    <ul>
-        <li>Household Services</li>
-        <li>Plumbing and Electrical</li>
-        <li>Gardening and Landscaping</li>
-        <li>Cleaning Services</li>
-        <li>Painting and Decorating</li>
-        <li>Professional Consultations</li>
-        <li>Appliance Repair</li>
-        <li>Interior Design</li>
-        <li>Furniture Assembly</li>
-        <li>Window Cleaning</li>
-        <li>Home Security Services</li>
-        <li>Carpet Cleaning</li>
-        <li>Handyman Services</li>
-        <li>Roofing Services</li>
-        <li>Moving Services</li>
-        <li>Laundry Services</li>
-        <li>Home Organization</li>
-    </ul>
-    <p>Our dedicated professionals are committed to ensuring top-quality services for our customers.</p>
+<h1>Our Services</h1>
+<h2 class="serve" style="font-family: cursive;">At Metro Fixers, we offer a diverse range of solutions:</h2>
+<div class="serve">
+    <section class="serv">
+        <ul>
+            <li>Household Services</li>
+            <li>Plumbing and Electrical</li>
+            <li>Gardening and Landscaping</li>
+            <li>Cleaning Services</li>
+            <li>Painting and Decorating</li>
+            <li>Professional Consultations</li>
+            <li>Appliance Repair</li>
+            <li>Interior Design</li>
+            <li>Furniture Assembly</li>
+            <li>Window Cleaning</li>
+            <li>Home Security Services</li>
+            <li>Carpet Cleaning</li>
+            <li>Handyman Services</li>
+            <li>Roofing Services</li>
+            <li>Moving Services</li>
+            <li>Laundry Services</li>
+            <li>Home Organization</li>
+        </ul>
+    </section>
+</div>
+<p class="serve" style="font-style: italic;">Our dedicated professionals are committed to ensuring top-quality services for our customers.</p>
 
     <div class="service_container">
         {%for service in ServImage %}

@@ -7,27 +7,31 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-def home(request):
+def index(request):
     global dict
     dict = {'user':request.user,
-            'dir':''}   
-    # if request.method == "GET":
+            'dir':'',
+            'userType':''}   
     
-    return render(request,'index.html')
+    allProdImages = ProductImage.objects.all()
+    dict['ProductIMAGE'] = allProdImages    
+    
+    return render(request,'index.html',dict)
+
+def home(request):
+    allProdImages = ProductImage.objects.all()
+    dict['ProductIMAGE'] = allProdImages    
+    return render(request,'index.html',dict)
 
 def about(request):
     allLabourUser = LabourUser.objects.all()
     
     dict['data'] = allLabourUser
-    return render(request,'about.html')
+    return render(request,'about.html',dict)
 
 def contact(request):
     return render(request,'contact.html',dict)
 
-def products(request):
-    allProdImages = ProductImage.objects.all()
-    dict['ProductIMAGE'] = allProdImages
-    return render(request,'products.html',dict)
 
 def services(request):
     allServImages = ServiceImage.objects.all()
@@ -67,16 +71,22 @@ def sign_in(request):
             
             profession = request.POST.get('profession')
             user1 = LabourUser(username = username,email = email,password=password,mobile = mobile,location=location , skills = skills,profession=profession,user = user)
+            dict['Luser'] = user1
+            
+            dict.update({'userType':'labour'})
             user1.save()
+            
 
         else :
             user1 = NormalUser(username = username,email = email,password=password,mobile = mobile,location=location , user = user)
             user1.save()    
-        
+            dict['Luser'] = user1
+            
+            dict.update({'userType':'normal'})
         
         
         return HttpResponseRedirect('/home')
-
+    
     return render(request,"index.html",dict)
 
 def log_in(request):
@@ -93,11 +103,21 @@ def log_in(request):
        
         if user is not None:
             login(request ,user)
+            user2 = NormalUser.objects.filter(username = user.username)
+            print(user2)
+            if user2.count() == 0:
+                user1 = LabourUser.objects.get(username = user.username)
+                dict.update({'userType':'labour'})
+            else:
+                user1 = NormalUser.objects.get(username = user.username)
+                dict.update({'userType':'normal'})
+
+            dict.update({'Luser' : user1})
             print(user.is_authenticated)
             messages.success(request , "successfully logged in")
             dict.update({'user':request.user})
             # img =Image.objects.all()
-            return HttpResponseRedirect('/home')  
+            return HttpResponseRedirect('/home') 
         else :
             messages.success(request , "invalid credential")  
 
@@ -119,6 +139,9 @@ def quizFun(request):
         user1 = LabourUser.objects.get(username = request.user.username)
         user1.score =user1.score+ int(score)
         user1.save()
+        dict.update({'Quize':False})
+       
+        dict.update({'Luser' : user1})
         return HttpResponseRedirect('/home')
     user1 = LabourUser.objects.get(username = request.user.username)
     quiz1 = quiz.objects.get(service = user1.profession)
@@ -135,9 +158,10 @@ def quizFun(request):
         questions2.append({question1.text : {ans1 : ans2}})
         
        
-        
+    dict['Qdata'] = questions2
+    dict['Quize'] = True    
 
-    return render(request ,'Quiz.html' , {'data':questions2});   
+    return render(request ,'Quiz.html' , dict);   
       
 
         

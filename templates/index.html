@@ -1,5 +1,8 @@
+
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Home{% endblock title %}
+
 {% block css %}
 
     .form-part {
@@ -14,32 +17,43 @@
         display:none;
     }
 
+    .form-part {
+        display: none;
+    }
+
+    .current-part {
+        display: block;
+    }
+
+    #labor-form{
+        display:none;
+    }
+
+    #services:hover, #products:hover, #about:hover, #contact:hover, #more:hover{
+        color: whitesmoke;
+        background-color: black;
+        font-family: cursive;
+        font-size: larger;
+        transition: background-color 1.5s;
+    }
+
 {% endblock css %}
 
 {%block body%}    
     <h1>Metro Fixers</h1>
 
     
-    
-<div></div>
+
 <section id="services">
+    
     <h2>Our Services</h2>
+
     <p>Explore a wide range of services to meet your needs. From household services to professional consultations, we've got you covered.</p>
-    <ul>
-        <li>Service 1</li>
-        <li>Service 2</li>
-        <!-- Add more service details here -->
-    </ul>
 </section>
 
 <section id="products">
     <h2>Our Products</h2>
     <p>Discover quality products for your home and lifestyle. From tools to accessories, find what you need here.</p>
-    <ul>
-        <li>Product 1</li>
-        <li>Product 2</li>
-        <!-- Add more product details here -->
-    </ul>
 </section>
 
     <section id="about">
