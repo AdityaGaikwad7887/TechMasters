@@ -10,7 +10,7 @@
 }
 .labour-box{
     margin: 10px;
-    height: 400px;
+    height: auto;
     width: 23%;
     background-color: white;
     border: 2px solid black;
@@ -50,6 +50,15 @@
     color: black;
 }
 
+.labour-list-location{
+    display: flex;
+    justify-content: center;
+   
+    padding: 1px;
+    text-align: center;
+    color: black;
+}
+
 
 {%endblock css%}
 {%block body%}
@@ -58,9 +67,10 @@
                 {%for labour in labours%}
                 
                 <div class="labour-box">
-                <img src="{{labour.image.url}}" alt="labour-image" >
+                <img src="{{labour.image.url}}" alt="labour-image">
                 <h2 class="labour-list-names">{{labour.username}}</h2>
                 <p class="labour-list-email">Email: {{labour.email}}</p>
+                <p class="labour-list-location">Location: {{labour.location}}</p>
                 <p class="labour-list-mobile">Mobile: {{labour.mobile}}</p>
                 </div>
                 {%endfor%}

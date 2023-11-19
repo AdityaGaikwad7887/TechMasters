@@ -44,7 +44,7 @@ def services(request):
 def log_out(request):
     logout(request)
     dict.update({'user': request.user})
-    # messages.success(request,'logout succesfully')
+    messages.success(request,'logout succesfully')
     return HttpResponseRedirect('/home')
 
 def sign_in(request):
@@ -58,7 +58,10 @@ def sign_in(request):
         location = request.POST.get('location')
         user_type = request.POST.get('user_type')
         
-        
+        user5 = User.objects.filter(username = username)
+        if user5.count() != 0:
+            messages.success(request,'Username Already exist try another one')
+            return HttpResponseRedirect('/home')
         user = User.objects.create_user(username = username, email = email , password = password)
         user.save()
         login(request ,user)

@@ -1,27 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock title %}
 {%block css%}
-.about{
-    background-color: aquamarine;
+h1:hover{
+    color:red;
 }
-
-.about:hover{
-    color: whitesmoke;
-    background-color: black;
-    font-family: cursive;
-    font-size: larger;
+.aboutPage{
+    height:90vh;
 }
 {%endblock css%}
 {%block body%} 
-
-<h1>About Us</h1>
-{% for item in data %}
-    <p>{{item.username}} & {{item.profession}}</p>
-{% endfor %}
-
-<section class="about">
+<div class="aboutPage">
+    <h1>About Us</h1>
+   
+    
 <p>Metro Fixers is more than just a service provider. We are the enablers of dreams and the architects of a seamless experience. Our story isn't just about services; it's about empowering individuals and enriching lives.</p>
 <p>As pioneers in our domain, we've set out on a mission to redefine the service industry. We believe in creating a vibrant ecosystem that connects skilled professionals with those in need, ensuring that each interaction is a step towards a brighter, more efficient world.</p>
 <p>At Metro Fixers, we don't just fix; we innovate, we inspire, and we transform. Our commitment is to cultivate a community where expertise meets opportunity, and reliability meets expectation. We're not just building a platform; we're constructing a bridge that joins hearts, fosters trust, and paints smiles.</p>
-</section>
+</div>
 {%endblock body%}

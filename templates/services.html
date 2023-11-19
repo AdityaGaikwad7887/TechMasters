@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Home{% endblock title %}
 {%block css%}
 .service_container{
@@ -9,7 +10,7 @@
 }
 .service_box{
     margin: 10px;
-    height: 400px;
+    height: auto;
     width: 23%;
     background-color: white;
     border: 2px solid black;
@@ -24,7 +25,7 @@
     width: 90%;
 }
 
-.servicetName{
+.serviceName{
     display: flex;
     justify-content: center;
     padding: 5px;
@@ -32,65 +33,105 @@
     color: black;
 }
 
-.serviceCharge{
+.serviceCharge,.serviceMore{
     display: flex;
     justify-content: center;
     padding: 5px;
     text-align: center;
     color: black;
 }
-.serve{
-    display: grid;
-    place-items: center;
+.main-section{
+    background-image: url({%static "back1.jpg"%});
+    height:400px;
+    width:100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
-.serv:hover{
-    font-size: larger;
-    background-color: black;
-    color: whitesmoke;
-    font-family: cursive;
+.main-section:hover{
+    background-image: url({% static "back2.jpg" %});
+}
+.main-msg{
+    background-color: white;
+    color: black;
+    height: auto;
+    width: auto;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+
+}
+
+.main-msg a{
+    color:#007185; 
+}
+
+.Name {
+    position: absolute;
+    top: 30%; /* Position at the vertical center of the container */
+    left: 50%; /* Position at the horizontal center of the container */
+    transform: translate(-50%, -50%);
+    color: black; /* Adjust text color */
+    text-align: center;
+    width: 100%;
+    height: auto%;
+    padding: 0px;
+    font-size: 59px; /* Adjust font size */
+    font-weight: bold; /* Adjust font weight */
 }
 
 
+.name-box {
+    position: absolute;
+    top: 30%; /* Center at the vertical middle of the page */
+    left: 50%; /* Center at the horizontal middle of the page */
+    transform: translate(-50%, -50%);
+    width: 495px; /* Adjust the width as needed */
+    border: 75px solid white; /* Border color */
+    border-radius: 15px;
+    {% comment %} overflow: hidden; /* Hide overflow content (if any) */ {% endcomment %}
+    box-shadow: 0 0 90px rgba(0, 0, 0, 2); /* Optional: Add a subtle box shadow */
+}
 
 {%endblock css%}
 {%block body%} 
+<div class="web-name">
+    <div class="name-box">
+        <h1 class="Name"> EasyLink Helpers!</h1>
+        
+    </div> 
+</div> 
 
-<h1>Our Services</h1>
-<h2 class="serve" style="font-family: cursive;">At Metro Fixers, we offer a diverse range of solutions:</h2>
-<div class="serve">
-    <section class="serv">
-        <ul>
-            <li>Household Services</li>
-            <li>Plumbing and Electrical</li>
-            <li>Gardening and Landscaping</li>
-            <li>Cleaning Services</li>
-            <li>Painting and Decorating</li>
-            <li>Professional Consultations</li>
-            <li>Appliance Repair</li>
-            <li>Interior Design</li>
-            <li>Furniture Assembly</li>
-            <li>Window Cleaning</li>
-            <li>Home Security Services</li>
-            <li>Carpet Cleaning</li>
-            <li>Handyman Services</li>
-            <li>Roofing Services</li>
-            <li>Moving Services</li>
-            <li>Laundry Services</li>
-            <li>Home Organization</li>
-        </ul>
-    </section>
+
+<div class="main-section">
+    <div class="main-msg">
+        <p>
+            you are on EaseLink Helpers you can also take services or Give services from our web  <a href="/about" class="">click here to go more about us</a>
+        </p>
+        
+    </div>
 </div>
-<p class="serve" style="font-style: italic;">Our dedicated professionals are committed to ensuring top-quality services for our customers.</p>
+    
+    
+    <p style="text-align:center;padding-top:10px">Our dedicated professionals are committed to ensuring top-quality services for our customers.</p>
 
     <div class="service_container">
         {%for service in ServImage %}
         <div class="service_box">
-            <div class="serviceName">{{service.caption}}</div>
+            <h2 class="serviceName">{{service.caption}}</h2>
             <hr stylr="background-color:red">
             <img src="{{service.image.url}}" alt="service image" >
             
-            <div class="serviceCharge">{{service.charges}}</div>
-            <a href="/services/{{service.caption}}">See More</a>
+            <h3 class="serviceCharge">Charges : {{service.charges}}</h3>
+            {% if user.is_authenticated%}
+            <a href="/services/{{service.caption}}" class= "serviceMore">See More</a>
+                
+            {%endif%}
+            
         </div>    
         {%endfor%}
         </div>

@@ -22,7 +22,10 @@ h2, p, ul {
 
 .profile-image {
     width: 30px;
+    position : absolute;
     height: 30px;
+    top :16px;
+    right : 19px;
     border-radius: 50%;
     cursor: pointer;
     padding: 0px;
@@ -32,8 +35,8 @@ h2, p, ul {
 .profile-popup {
     display: none;
     position: fixed;
-    top: 47%;
-    left: 85%;
+    top: 50%;
+    left: 75%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     width: 300px; /* Set a fixed width */
@@ -41,6 +44,7 @@ h2, p, ul {
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1.5);
     z-index: 1;
+
 }
 
 body {
@@ -55,7 +59,7 @@ body {
 
 /* Styling for the Amazon-like header */
 .amazon-header {
-    background-color: #6a1d4b;
+    background-color: crimson;
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 10px 0;
@@ -109,7 +113,7 @@ h1 {
 p {
     font-size: 1.1em;
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 ul {
@@ -243,13 +247,38 @@ select:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
+.text_Logo{
+    position: absolute;
+    height: auto;
+    left: 30px;
+    width: 30px;
+}
+.logo{
+    position: absolute;
+    height: 50px;
+    top : 4px;
+    left: 30px;
+    
+    border-radius:20px;
+}
 footer{
+
     background-color: black;
 }
 
 .FooterContainer{
     width: 100%;
     padding: 70px 30px 20px;
+}
+
+.logoContainer{
+    display :flex;
+    justify-content:center;
+    
+}
+
+.logoContainer img{
+    height:139px;
 }
 
 .SocialIcons{
@@ -332,24 +361,44 @@ footer{
     }
 }
 
-.logo{
-    position: absolute;
-    height: auto;
-    left: 30px;
-    width: 30px;
+.Userlogin{
+    position : absolute;
+    top : 19px;
+    right : 75px;
 }
+.signIn{
+    position : absolute;
+    top : 19px;
+    right : 0px;
+}
+
+.messages{
+    background-color: red;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+
+
 {% block css %}{% endblock css %}
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <title>{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     
-    
+
+
+   
   <div class="amazon-header">
         <div class="amazon-navbar">
-            <img src="{% static "logo1.jpg" %}" alt="img" class="logo">
+            <img src="{% static "logo2.png" %}" alt="img" class="logo">
             <ul style="position: left;">
                 
                 <li><a href="/home" >Home</a></li>
@@ -362,14 +411,24 @@ footer{
                 <img src="{%static "defualtuser.jpg" %}" alt="Profile" class="profile-image" onclick="toggleProfilePopup()">
                 
                 {%else%}
-                <li class="Userlogin"  style="margin-left: 20rem;"><a href="/Login" >Login</a></li>
-                <li><a href="/sign_in" >Sign-in</a></li>
+                <li class="Userlogin"><a href="/Login" >Login</a></li>
+                <li class="signIn"><a href="/sign_in" >Sign-in</a></li>
                 {% endif %}
                 
                 
             </ul>
         </div>
     </div>
+
+    {% if messages %}
+    <ul class="messages" id="messages">
+    {% for message in messages %}
+        <span class="close-btn1" style="position: absolute;right: 30px;cursor: pointer;" onclick="toggleMessPopup()">&times;</span>
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    
     <div class="profile-popup" id="profilePopup">
         <span class="close-btn" onclick="toggleProfilePopup()">&times;</span>
         <div class="profile">
@@ -380,12 +439,12 @@ footer{
                     <h1>{{user.username}}</h1>
                     {% if userType == 'labour' or userType == 'normal' %}
                     <p>{{Luser.email}}</p>
-                    <p>{{Luser.mobile}}</p>
-                    <p>{{Luser.location}}</p>
+                    <p>Mobile No. :{{Luser.mobile}}</p>
+                    <p>Laocation :{{Luser.location}}</p>
                     {% if  userType == 'labour' %}
-                    <p>{{Luser.profession}}</p>
-                    <p>{{Luser.skill}}</p>
-                    <p>{{Luser.score}}</p>
+                    <p>Profession :{{Luser.profession}}</p>
+                    <p>Skills : {{Luser.skills}}</p>
+                    <p>Score : {{Luser.score}}</p>
                     {% if not Quize %}
                     <p> <a href="/quiz">Give Quiz</a></p>
                     {% endif %}
@@ -508,34 +567,47 @@ footer{
     {% endif %}
     {% endif %}
     {% block body %}{% endblock body %}
+   
+    <footer>
+        <div class="FooterContainer">
+            <div class="SocialIcons">
+                    <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.google.com"><i class="fa-brands fa-google-plus"></i></a>
+                    <a href="https://www.youtube.com"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="footernav">
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/about">Our Team</a></li>
+                </ul>
+            </div>
+
+            <div class="logoContainer">
+                <div class="logoback">
+                <img src="{% static "logo footer.png" %}" alt="img">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footerbottom">
+            <p>Copyright &copy;2023; Designed By <span class="designer">TechMaster</span></p>
+        </div>
+    </footer>  
     <script>
         function toggleProfilePopup() {
             var popup = document.getElementById('profilePopup');
             popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
         }
+
+        function toggleMessPopup() {
+            var popup = document.getElementById('messages');
+            popup.style.display = 'none';
+        }
         
     {% block script %}{% endblock script %}    
     </script>
-<footer>
-        <div class="FooterContainer">
-            <div class="SocialIcons">
-                    <a href=""><i class="fa-brands fa-facebook"></i></a>
-                    <a href=""><i class="fa-brands fa-instagram"></i></a>
-                    <a href=""><i class="fa-brands fa-google-plus"></i></a>
-                    <a href=""><i class="fa-brands fa-youtube"></i></a>
-            </div>
-            <div class="footernav">
-                <ul>
-                    <li><a href="Home">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="Our Team">Our Team</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footerbottom">
-            <p>Copyright &copy;2023; Designed By <span class="designer">Akhilesh</span></p>
-        </div>
-</footer>  
 </body>
 </html>
