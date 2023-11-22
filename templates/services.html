@@ -97,6 +97,14 @@
     box-shadow: 0 0 90px rgba(0, 0, 0, 2); /* Optional: Add a subtle box shadow */
 }
 
+.service_box:hover{
+    background-color: grey;
+}
+
+#c:hover{
+    color: white;
+}
+
 {%endblock css%}
 {%block body%} 
 <div class="web-name">
@@ -122,13 +130,13 @@
     <div class="service_container">
         {%for service in ServImage %}
         <div class="service_box">
-            <h2 class="serviceName">{{service.caption}}</h2>
-            <hr stylr="background-color:red">
+            <h2 class="serviceName" id="c">{{service.caption}}</h2>
+            <hr stylr="background-color:red" id="c">
             <img src="{{service.image.url}}" alt="service image" >
             
             <h3 class="serviceCharge">Charges : {{service.charges}}</h3>
             {% if user.is_authenticated%}
-            <a href="/services/{{service.caption}}" class= "serviceMore">See More</a>
+            <a href="/services/{{service.caption}}" class= "serviceMore" id="c">See More</a>
                 
             {%endif%}
             

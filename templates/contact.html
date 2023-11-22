@@ -4,11 +4,20 @@
 .contactPage{
     height:90vh;
 }
+
+.sect{
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    background-color: white;
+}
+
 {%endblock css%}
 {%block body%} 
     <div class="contactPage">
     <h1>Contact Us</h1>
-    <p>Have questions or need assistance?</p>
+    <section class="sect">
+        <p>Have questions or need assistance?</p>
     <p>Contact us through the following means:</p>
     <ul>
         <li>Email: contact@urbanservices.com</li>
@@ -16,5 +25,7 @@
         <li>Address: 123 Urban Street, City, Country</li>
     </ul>
     <p>We're here to help you!</p>
+    </section>
+
 </div>
 {%endblock body%}

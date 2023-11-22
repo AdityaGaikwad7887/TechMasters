@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock title %}
 {%block css%}
-h1:hover{
-    color:red;
-}
+
 .aboutPage{
     height:90vh;
+}
+
+.sect{
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+    background-color: white;
 }
 {%endblock css%}
 {%block body%} 
@@ -13,8 +18,13 @@ h1:hover{
     <h1>About Us</h1>
    
     
-<p>Metro Fixers is more than just a service provider. We are the enablers of dreams and the architects of a seamless experience. Our story isn't just about services; it's about empowering individuals and enriching lives.</p>
-<p>As pioneers in our domain, we've set out on a mission to redefine the service industry. We believe in creating a vibrant ecosystem that connects skilled professionals with those in need, ensuring that each interaction is a step towards a brighter, more efficient world.</p>
-<p>At Metro Fixers, we don't just fix; we innovate, we inspire, and we transform. Our commitment is to cultivate a community where expertise meets opportunity, and reliability meets expectation. We're not just building a platform; we're constructing a bridge that joins hearts, fosters trust, and paints smiles.</p>
+<section class="sect">
+    <p>The contemporary household is no stranger to the incessant demands of daily life, encompassing everything from plumbing emergencies to routine cleaning. In response to the evolving needs and expectations of modern households, we present an appointment-based household service provider platform—a transformative solution aimed at redefining the household service industry. This paper delves into the intricate design and functionality of the platform, which is built to facilitate seamless connections between consumers seeking household services and skilled professionals eager to fulfill those needs.
+        Our research journey begins with an exploration of the household service industry's current state, revealing the challenges faced by service providers operating offline and the growing expectations of consumers for efficient, convenient, and reliable services. By conducting surveys among service providers and consumers, and through an extensive review of existing literature, we construct a foundational understanding of the industry dynamics, users' preferences, and pain points.
+        The proposed platform is designed to address these challenges by offering a user-friendly interface, comprehensive service categories, efficient scheduling and booking systems, secure payment methods, and robust review and rating features. The platform aims to empower both service providers and consumers by enhancing visibility, ensuring predictable income, and providing a transparent and user-friendly interface.
+        Upon the completion of user testing and a pilot launch, our result discussion will examine the platform's performance metrics, user feedback, and implications for the household service industry. It underscores the platform's ability to improve operational efficiency for service providers, elevate user satisfaction, and foster economic empowerment.
+        Our research paper offers a comprehensive understanding of the appointment-based household service provider platform, its potential to revolutionize the industry, and the transformative possibilities it presents for households and service providers. As the household service landscape undergoes a dynamic shift, our platform stands as an embodiment of progress—a testament to the power of technology to enhance the lives of both service seekers and service providers, fostering greater efficiency, convenience, and economic stability.
+        .</p>
 </div>
+</section>
 {%endblock body%}
